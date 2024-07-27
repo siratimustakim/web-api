@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121.
+-->
+<Project>
+  <PropertyGroup>
+    <_PublishTargetUrl>C:\Users\krl\Documents\quran-api\bin\Release\net8.0\publish\</_PublishTargetUrl>
+    <History>True|2024-07-24T19:23:56.0196052Z;True|2024-07-22T22:06:41.8845988+03:00;True|2024-07-22T21:25:51.5169297+03:00;True|2024-07-21T21:55:32.1539647+03:00;True|2024-07-21T21:28:14.1468776+03:00;</History>
+    <LastFailureDetails />
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+  </PropertyGroup>
+  <ItemGroup>
+    <DestinationConnectionStrings Include="DefaultConnection">
+      <Value>Server=104.247.162.242\MSSQLSERVER2019%3bDatabase=siratimu_quran%3bUser ID=siratimu_main%3bPassword=&amp;25q6ow6F%3bTrusted_Connection=True%3bTrustServerCertificate=True%3bIntegrated Security=false</Value>
+    </DestinationConnectionStrings>
+  </ItemGroup>
+</Project>

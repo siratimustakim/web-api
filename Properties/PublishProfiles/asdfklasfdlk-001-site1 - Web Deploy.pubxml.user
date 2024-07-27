@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project>
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword />
+    <History>True|2024-07-24T20:08:24.1684909Z;False|2024-07-24T23:08:01.0116623+03:00;True|2024-07-24T22:58:26.2016272+03:00;True|2024-07-24T22:46:50.2588637+03:00;</History>
+    <LastFailureDetails />
+  </PropertyGroup>
+  <ItemGroup>
+    <DestinationConnectionStrings Include="DefaultConnection">
+      <Value>Server=104.247.162.242\MSSQLSERVER2019%3bDatabase=siratimu_quran%3bUser ID=siratimu_main%3bPassword=&amp;25q6ow6F%3bTrusted_Connection=True%3bTrustServerCertificate=True%3bIntegrated Security=false</Value>
+    </DestinationConnectionStrings>
+  </ItemGroup>
+</Project>

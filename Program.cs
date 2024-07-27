@@ -35,15 +35,16 @@ builder.Services.AddIdentityApiEndpoints<IdentityUser>()
 builder.Services.AddScoped<IDatabaseConnection, DatabaseConnection>();
 builder.Services.AddScoped<IChapterRepository, ChapterRepository>();
 builder.Services.AddScoped<IVerseRepository, VerseRepository>();
+builder.Services.AddScoped<ITranslationRepository, TranslationRepository>();
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
+//if (app.Environment.IsDevelopment())
+//{   
     app.UseSwagger();
     app.UseSwaggerUI();
-}
+//}
 
 app.MapIdentityApi<IdentityUser>();
 app.UseHttpsRedirection();
@@ -51,5 +52,4 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
-
 app.Run();

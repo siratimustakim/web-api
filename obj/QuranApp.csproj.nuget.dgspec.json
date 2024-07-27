@@ -66,6 +66,10 @@
               "target": "Package",
               "version": "[9.0.0-preview.5.24306.7, )"
             },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.3, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.4.0, )"

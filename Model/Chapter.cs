@@ -2,12 +2,12 @@
 {
     public class Chapter
     {
-        public int id { get; set; }
-        public string revelation_place { get; set; }
-        public bool bismillah_pre { get; set; }
-        public string name_simple { get; set; }
-        public string name_arabic { get; set; }
-        public int verses_count { get; set; }
-        public string audio_url{ get; set; }
+        public int Id { get; set; }
+        public required string RevelationPlace { get; set; }
+        public bool BismillahPre { get; set; }
+        public required string NameSimple { get; set; }
+        public required string NameArabic { get; set; }
+        public int VersesCount { get; set; }
+        public required string AudioUrl { get; set; }
     }
 }
