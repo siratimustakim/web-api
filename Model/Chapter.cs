@@ -9,5 +9,6 @@
         public required string NameArabic { get; set; }
         public int VersesCount { get; set; }
         public required string AudioUrl { get; set; }
+        public required string SearchableText { get; set; }
     }
 }

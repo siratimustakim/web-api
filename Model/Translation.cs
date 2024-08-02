@@ -7,6 +7,7 @@
         public int VerseId { get; set; }
         public int ResourceId { get; set; }
         public required string Text { get; set; }
+        public required string Extra { get; set; }
 
         public required string AuthorName { get; set; }
         public required string ResourceName { get; set; }

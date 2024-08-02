@@ -5,6 +5,7 @@ namespace QuranApp.Repository
     public interface ITranslationRepository
     {
         Task<IEnumerable<Translation>> GetAsync(int chapter_id, int verse_id);
+        Task<IEnumerable<Translation>> GetAsync(string text);
     }
 
     public class TranslationRepository : ITranslationRepository
@@ -16,6 +17,18 @@ namespace QuranApp.Repository
             _databaseConnection = databaseConnection;
         }
 
+        public async Task<IEnumerable<Translation>> GetAsync(string text)
+        {
+            string sql = @"SELECT [chapter_id] as ChapterId
+                                  ,[verse_id] as VerseId
+                                  ,[text] as Text
+                            FROM [dbo].[Translation]
+                            WHERE [text] LIKE '%' + @Text + '%'";
+            var list = await _databaseConnection.QueryAsync<Translation>(sql, new { Text = text });
+            return list;
+
+        }
+
         public async Task<IEnumerable<Translation>> GetAsync(int chapter_id, int verse_id)
         {
             string sql = @"SELECT [t].[id] as Id
@@ -23,6 +36,7 @@ namespace QuranApp.Repository
                                  ,[t].[verse_id] as VerseId
                                  ,[t].[resource_id] as ResourceId
                                  ,[t].[text] as Text
+                                 ,[t].[extra] as Extra
 	                             ,[r].[name] as ResourceName
 	                             ,[r].[publisher] as Publisher
 	                             ,[a].[name] as AuthorName

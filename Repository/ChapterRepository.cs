@@ -4,6 +4,7 @@ namespace QuranApp.Repository
 {
     public interface IChapterRepository
     {
+        Task<IEnumerable<Chapter>> GetAsync(string text);
         Task<IEnumerable<Chapter>> GetChaptersAsync();
         Task<Chapter> GetChapterByIdAsync(int id);
     }
@@ -27,6 +28,7 @@ namespace QuranApp.Repository
                               ,[c].[name_arabic] as NameArabic
                               ,[c].[verses_count] as VersesCount
                               ,[a].[audio_url] as AudioUrl
+                              ,[c].[searchable_text] as SearchableText
                            FROM [dbo].[Chapter] c
                            LEFT JOIN [dbo].[Audio] a
                            ON [c].[id] = [a].[chapter_id]";
@@ -43,12 +45,23 @@ namespace QuranApp.Repository
                               ,[c].[name_arabic] as NameArabic
                               ,[c].[verses_count] as VersesCount
                               ,[a].[audio_url] as AudioUrl
+                              ,[c].[searchable_text] as SearchableText
                            FROM [dbo].[Chapter] c
                            LEFT JOIN [dbo].[Audio] a
                            ON [c].[id] = [a].[chapter_id]
                            WHERE [c].[id] = @Id";
             var result = await _databaseConnection.QueryAsync<Chapter>(sql, new { Id = id });
             return result.FirstOrDefault();
+        }
+
+        public async Task<IEnumerable<Chapter>> GetAsync(string text)
+        {
+            string sql = @"SELECT [id] as Id
+                                 ,[name_simple] as NameSimple
+                                 ,[searchable_text] as SearchableText
+                          FROM [dbo].[Chapter]
+                          WHERE [searchable_text] LIKE '%' + @Text + '%'";
+            return await _databaseConnection.QueryAsync<Chapter>(sql, new { Text = text });
         }
     }
 }

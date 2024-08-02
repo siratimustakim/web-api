@@ -16,13 +16,13 @@ namespace QuranApp.Controllers
         }
 
         [HttpGet("ChapterId/{chapter_id}")]
-        public async Task<ActionResult<IEnumerable<Verse>>> GetByChapterId(int chapter_id)
+        public async Task<ActionResult<VerseList>> GetByChapterId(int chapter_id, [FromQuery] int page_number)
         {
-            var verses = await _verseRepository.GetVersesByChapterId(chapter_id);
-            if (verses == null)
-            {
-                return NotFound();
-            }
+            VerseList verses = new VerseList();
+
+            if (page_number > 0) verses = await _verseRepository.GetVersesByChapterId(chapter_id, page_number);
+            if (verses == null) return NotFound();
+
             return Ok(verses);
         }
 
