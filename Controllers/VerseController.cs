@@ -26,6 +26,15 @@ namespace QuranApp.Controllers
             return Ok(verses);
         }
 
+        [HttpGet("GetVerseById")]
+        public async Task<ActionResult<Verse>> GetVerseById([FromQuery] int chapter_id, [FromQuery] int verse_id)
+        {
+            var verse = await _verseRepository.GetVerseById(chapter_id, verse_id);
+            if (verse == null) return NotFound();
+
+            return Ok(verse);
+        }
+
         [HttpGet("JuzId/{juz_id}")]
         public async Task<ActionResult<IEnumerable<Verse>>> GetByJuzId(int juz_id)
         {

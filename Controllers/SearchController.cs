@@ -18,6 +18,8 @@ namespace QuranApp.Controllers
         [HttpGet("Get")]
         public async Task<ActionResult<IEnumerable<Chapter>>> List([FromQuery] string text)
         {
+            if (text.Length < 2) return NotFound();
+
             var list = await _searchRepository.Get(text);
             return Ok(list);
         }

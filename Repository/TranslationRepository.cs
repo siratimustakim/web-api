@@ -19,14 +19,14 @@ namespace QuranApp.Repository
 
         public async Task<IEnumerable<Translation>> GetAsync(string text)
         {
-            string sql = @"SELECT [chapter_id] as ChapterId
-                                  ,[verse_id] as VerseId
-                                  ,[text] as Text
+            string sql = @"SELECT TOP 5 
+                                  [chapter_id] as ChapterId
+                                 ,[verse_id] as VerseId
+                                 ,[text] as Text
                             FROM [dbo].[Translation]
                             WHERE [text] LIKE '%' + @Text + '%'";
             var list = await _databaseConnection.QueryAsync<Translation>(sql, new { Text = text });
             return list;
-
         }
 
         public async Task<IEnumerable<Translation>> GetAsync(int chapter_id, int verse_id)

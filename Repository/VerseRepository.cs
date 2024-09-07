@@ -1,5 +1,4 @@
-﻿using Newtonsoft.Json;
-using QuranApp.Model;
+﻿using QuranApp.Model;
 using QuranApp.Util;
 
 namespace QuranApp.Repository
@@ -10,6 +9,7 @@ namespace QuranApp.Repository
         Task<VerseList> GetVersesByChapterId(int chapterId, int pageNumber);
         Task<IEnumerable<Verse>> GeVersesByJuzId(int juzNumber);
         Task<IEnumerable<Verse>> GetVersesByPage(int pageNumber);
+        Task<Verse> GetVerseById(int chapterId, int verseId);
     }
 
     public class VerseRepository : IVerseRepository
@@ -48,7 +48,7 @@ namespace QuranApp.Repository
                     VerseKey = verse.VerseKey,
                     PageNumber = verse.PageNumber,
                     VerseNumber = verse.VerseNumber,
-                    ArabicVerseNumber = Utils.GetArabicNumber(verse.VerseNumber.ToString()),
+                    ArabicVerseNumber = verse.ArabicVerseNumber,
                     Text = verse.Text,
                     Translations = translation
                 };
@@ -138,6 +138,36 @@ namespace QuranApp.Repository
 
             var newList = await Task.WhenAll(tasks);
             return new VerseList { Verses = newList.ToList(), Pagination = pagination };
+        }
+
+        public async Task<Verse> GetVerseById(int chapterId, int verseId)
+        {
+            string sql = @"SELECT  [id] as Id
+                                  ,[chapter_id] as ChapterId
+                                  ,[page_number] as PageNumber
+                                  ,[verse_number] as VerseNumber
+                                  ,[verse_key] as VerseKey
+                                  ,[juz_number] as JuzNumber
+                                  ,[text] as Text
+                                  ,[arabic_verse_number] as ArabicVerseNumber
+                           FROM [dbo].[Verse]
+                           WHERE chapter_id = @ChapterId and verse_number = @VerseId";
+            var verse = await _databaseConnection.QuerySingleAsync<Verse>(sql, new { ChapterId = chapterId, VerseId = verseId });
+            
+            var translation = await _translationRepository.GetAsync(chapterId, verse.VerseNumber);
+            return new Verse
+            {
+                Id = verse.Id,
+                ChapterId = verse.ChapterId,
+                JuzNumber = verse.JuzNumber,
+                VerseKey = verse.VerseKey,
+                PageNumber = verse.PageNumber,
+                VerseNumber = verse.VerseNumber,
+                ArabicVerseNumber = verse.ArabicVerseNumber,
+                Text = verse.Text,
+                Translations = translation
+            };
+
         }
     }
 }
